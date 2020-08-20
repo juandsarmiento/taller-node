@@ -10,12 +10,11 @@ router.get('/', (req, res) => {
             response.success(req, res, data)
         })
         .catch(error => {
-            response.error(req, res, error, 500);
+            response.error(req, res, error, 500, error);
         })
 })
 
 router.post('/', (req, res) => {
-    console.log('post called!')
     controller
         .addMessage(req.body.user, req.body.message)
         .then((message) => response.success(req, res, message))
@@ -35,10 +34,10 @@ router.patch('/:id', (req, res) => {
 })
 
 router.delete('/:id', (req, res) => {
-    const {params:{id}} = req;
+    const { params: { id } } = req;
     controller.deleteMessage(id)
         .then((data) => {
-            response.success(req,res,`user ${id} deleted`,200)
+            response.success(req, res, `user ${id} deleted`, 200)
         })
         .catch(error => {
             response.error(req, res, 'Internal error', 500, error);

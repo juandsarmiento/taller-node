@@ -1,10 +1,12 @@
 const express = require('express');
-const controllerMessage = require('../components/message/network');
-const controllerUser = require('../components/user/network');
+const messageController = require('../components/message/network');
+const userController = require('../components/user/network');
+const chatController = require('../components/chat/network');
 
 const routes = (server) => {
-    server.use('/message', controllerMessage);
-    server.use('/user', controllerUser)
+    server.use('/message', messageController);
+    server.use('/user', userController)
+    server.use('/chat', chatController)
 }
 
 module.exports = routes;

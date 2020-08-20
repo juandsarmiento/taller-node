@@ -2,6 +2,8 @@ const store = require('./store');
 
 const addMessage = (user, message) => {
     return new Promise((resolve, reject) => {
+        console.log(message);
+        console.log(user)
         if (!user || !message) {
             reject('No user');
             console.error('[messageController]: No user');
@@ -20,7 +22,14 @@ const addMessage = (user, message) => {
 }
 const getMessages = (filterUser) => {
     return new Promise((resolve, reject) => {
-        resolve(store.getMessages(filterUser));
+        store.getMessages(filterUser)
+            .then(data => {
+                console.log(data);
+                resolve(data);
+            })
+            .catch((e) => {
+                reject(e);
+            })
     })
 }
 const updateMessage = (id, newMessage) => {
@@ -34,9 +43,9 @@ const updateMessage = (id, newMessage) => {
         resolve(message)
     })
 }
-const deleteMessage =  (id) => {
-    return new Promise(async(resolve, reject)=> {
-        if(!id){
+const deleteMessage = (id) => {
+    return new Promise(async (resolve, reject) => {
+        if (!id) {
             reject('Invalid data');
 
             return;

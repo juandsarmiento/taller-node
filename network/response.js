@@ -5,10 +5,10 @@ exports.success = (req, res, message, status = 200) => {
     });
 }
 
-exports.error = (req, res, message, status = 500, details) => {
+exports.error = (req, res, message = 'Internal error', status = 500, details) => {
     console.log(details);
     res.status(status).send({
-        error: message,
+        error:  `${message}`,
         body:''
     })
 }
