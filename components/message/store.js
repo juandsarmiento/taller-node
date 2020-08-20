@@ -1,13 +1,4 @@
-const db = require('mongoose');
 const Model = require('./model');
-//mongodb+srv://db_user_taller_node:<password>@cluster0.11ztz.azure.mongodb.net/<dbname>?retryWrites=true&w=majority
-db.Promise = global.Promise;
-db.connect('mongodb+srv://db_user_taller_node:DLFjcVUsPyLQOsHF@cluster0.11ztz.azure.mongodb.net/db_taller_node?retryWrites=true&w=majority', {
-    useNewUrlParser: true,
-    useUnifiedTopology:true
-});
-console.log('[db]: Connection success!')
-const list = [];
 
 const addMessage = (message) => {
     const myMessage = new Model(message);

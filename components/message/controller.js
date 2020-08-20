@@ -34,7 +34,6 @@ const updateMessage = (id, newMessage) => {
         resolve(message)
     })
 }
-
 const deleteMessage =  (id) => {
     return new Promise(async(resolve, reject)=> {
         if(!id){
