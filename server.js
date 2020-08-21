@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const server = require('http').Server(app);
+const { DB_URL, PORT, PUBLIC_PATH, HOST } = require('./config');
 
 const cors = require('cors');
 const bodyParser = require('body-parser');
@@ -8,19 +9,18 @@ const socket = require('./socket');
 const db = require('./db');
 const router = require('./network/routes');
 
-
-db.connect('mongodb+srv://db_user_taller_node:DLFjcVUsPyLQOsHF@cluster0.11ztz.azure.mongodb.net/db_taller_node?retryWrites=true&w=majority');
+db.connect(DB_URL);
 
 app.use(cors());
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended:false}));
+app.use(bodyParser.urlencoded({ extended: false }));
 
 socket.connect(server);
 router(app);
 
-app.use('/app',express.static('public'));
+app.use(PUBLIC_PATH, express.static('public'));
 
 
-server.listen(3000, () => {
-    console.log('App is listening on http://localhost:3000')
+server.listen(PORT, () => {
+    console.log(`App is listening on ${HOST}:${PORT}`)
 })
