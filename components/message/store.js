@@ -1,7 +1,7 @@
 const Model = require('./model');
 
-const addMessage = (message) => {
-    const myMessage = new Model(message);
+const addMessage = (newMessage) => {
+    const myMessage = new Model(newMessage);
     myMessage.save();
 }
 

@@ -1,5 +1,17 @@
 <html>
-    <body>
-        Hello World!
-    </body>
+  <head>
+    <script src="/socket.io/socket.io.js"></script>
+  </head>
+  <body>
+    Open the console!
+    <script>
+      const socket = io.connect("http://localhost:3000", {
+        forceNew: true,
+      });
+
+      socket.on("message", (data) => {
+        console.log(data);
+      });
+    </script>
+  </body>
 </html>

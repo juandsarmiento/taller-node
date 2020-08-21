@@ -1,22 +1,24 @@
 const store = require('./store');
+const { socket } = require('../../socket');
 
-const addMessage = (user, message) => {
+const addMessage = (user, message, chat, file = {}) => {
     return new Promise((resolve, reject) => {
         console.log(message);
         console.log(user)
-        if (!user || !message) {
-            reject('No user');
-            console.error('[messageController]: No user');
+        if (!user || !message || !chat) {
+            reject('Invalid data!');
 
             return;
         }
         const fullMessage = {
             user,
             message,
+            chat,
+            file,
             date: new Date()
         }
-        console.log(fullMessage);
         store.addMessage(fullMessage);
+        socket.io.emit('message', fullMessage);
         resolve(fullMessage);
     })
 }
